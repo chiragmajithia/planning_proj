@@ -10,12 +10,14 @@ function [map_handle] = generateMap( seed_, map_height_, map_width_, food_n_, ca
 	map = zeros(map_width_, map_height_);
 
 	for i = 1:obstacle_n_
-		x = randi([20 map_width_-20]);
-		y = randi([20 map_height_-20]);
-		d = 4*randi([5 10]);
-		obst_loc(i,:) = [x y d/2];
-		obst_handle(i) = rectangle('Position', [x y d d], 'Curvature', [1 1], 'FaceColor', 'b');
-		map(x-d/2:x+d/2,y-d/2:y+d/2) = OBS_VAL;
+		maxd = 40/2;
+		pad = PADDING + maxd;
+		x = randi([pad map_width_-pad]);
+		y = randi([pad map_height_-pad]);
+		d = 4*randi([5 10])/2;
+		obs_loc(i,:) = [x y d];
+		obs_handle(i) = rectangle('Position', [x y d d], 'Curvature', [1 1], 'FaceColor', 'b');
+		map(x:x+d,y:y+d) = OBS_VAL;
 	end
 
 	for i = 1:food_n_
@@ -27,11 +29,13 @@ function [map_handle] = generateMap( seed_, map_height_, map_width_, food_n_, ca
 	end
 
 	for i = 1:cache_n_
-		x = randi([20 map_width_-20]);
-		y = randi([20 map_height_-20]);
+		maxd = 16;
+		pad = PADDING + maxd;
+		x = randi([pad map_width_-pad]);
+		y = randi([pad map_height_-pad]);
 		d = 4*randi([2 4]);
 		cache_loc(i,:) = [x y d/2];
-		cache_loc(i) = rectangle('Position', [x y d d], 'Curvature', [1 1], 'FaceColor', 'b');
+		cache_loc(i) = rectangle('Position', [x y d d], 'Curvature', [1 1], 'FaceColor', 'g');
 		map(x-d/2:x+d/2,y-d/2:y+d/2) = CACHE_VAL;
 	end
 

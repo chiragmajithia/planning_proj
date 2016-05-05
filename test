@@ -1,0 +1,32 @@
+while x_max < width
+    i
+	seg_ = segs(i,:);
+    j = i ;
+	while y_max < height
+        sprintf('comparing %d with %d',i,j)
+        j = j+1;
+        center1 = [seg_(1) seg_(2)];
+        center2 = [segs(j,1) segs(j,2)]
+		if(lineOfSight(center1(1),center1(2),center2(1),center2(2)) == true)
+            area = seg_(7)  + segs(j,7);
+            o_x = seg_(3);
+            o_y = seg_(4);
+            dc = center2 - center1;
+            dx=seg_(5);
+            dy = seg_(6)+segs(j,6);
+            %input('');
+            area = dx*dy;
+            center = [round(dx/2),round(dy/2)]
+            seg_ = [center,o_x,o_y,dx,dy,area];
+            rectangle('Position',seg_(3:6),'FaceColor','g');
+            %input('')
+            y_max = seg_(4) + dy
+        end
+    end
+    y_max = 0;
+    merged_seg(cnt,:) = seg_
+    input('iteration over')
+    i = j
+    cnt = cnt + 1;
+    x_max = seg_(4) + dx;
+end

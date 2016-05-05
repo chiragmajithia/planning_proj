@@ -21,22 +21,22 @@ classdef Agent<handle
       end
 
       function [] = move(obj,pos2)
-      	position = [pos2 obj.handle.Position(3:4)]
-      	obj.handle.Visible = 'off'
-      	obj.handle = rectangle('Position',position,'FaceColor',obj.handle.FaceColor)
+      	position = [pos2 obj.handle.Position(3:4)];
+      	obj.handle.Visible = 'off';
+      	obj.handle = rectangle('Position',position,'FaceColor',obj.handle.FaceColor);
       end 
 
       function [] = setName(obj,name_)
-      	obj.name = name_
+      	obj.name = name_;
       end
 
       function []= movePath(obj,v)
       	h = obj.plotPath();
-      	dist = obj.pathDistance()
+      	dist = obj.pathDistance();
       	t = dist/v;
       	[r,c] = size(obj.path_);
       	for i = 1:r
-      		obj.move(obj.path_(i,:));
+      		obj.move(obj.path_(i,:)-[5 5]);
       		pause(t/r);
       	end
       	set(h,'XData',[],'Ydata',[]);
@@ -59,7 +59,7 @@ classdef Agent<handle
       % end
       
       function [] = addVertex(obj,v)
-      	obj.path_ = [obj.path_; v]
+      	obj.path_ = [obj.path_; v];
       end
       
       function [] = setColor(obj,c)
@@ -67,7 +67,7 @@ classdef Agent<handle
       end
 
       function dist = pathDistance(obj)
-      	[r,c] = size(obj.path_)
+      	[r,c] = size(obj.path_);
       	dist = 0;
       	for i = 1:r-1
       		d_pos = obj.path_(i,:)-obj.path_(i+1,:);
@@ -80,4 +80,4 @@ end
 %{
 	TODO:
 	moveStep()
-}%
+%}
