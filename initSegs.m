@@ -52,7 +52,7 @@ end
 end
 
 if visual_run
-neighborCheck;
+%neighborCheck;
 end
 
 dg = configSegGraph(seg);
