@@ -1,0 +1,25 @@
+function [ id ] = getSeg(p,seg)
+global visualize_ru
+%GETSEG Computes which segement id a given point false in
+%   Detailed explanation goes here
+x = p(1);
+y = p(2);
+n = size(seg,1);
+found = false;
+for i = 1 : n
+	id = seg(i).id;
+	o = seg(i).o
+	d = seg(i).d;
+	if((x >= o.x && x < o.x+d.w) && (y >= o.y && y < o.y+d.h)) 
+        found = true;
+		break;
+	end
+end
+if ~found
+    id = 0;
+else
+plot(x,y,'Marker','d');
+seg(id).visible(true);
+end
+end
+

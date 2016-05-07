@@ -3,6 +3,7 @@ classdef Segs<handle
     %   Detailed explanation goes here
     
     properties
+    id%id numbers = should remain array index -kept to ensure if we need to delete any
     c %center
     o %origin
     d %dim dx,dy
@@ -11,10 +12,14 @@ classdef Segs<handle
     h %handle
     r %rectangle
     p2n = {} %path to neighbor
+    f_loc =[] %pos.x in seg %pos.y in seg %id in food arr
+    p_map
+    p %measure of coverage 0 means covered 1 means free
     end
     
     methods
-        function init(obj,seg,handle)
+        function init(obj,seg,handle,id)
+            obj.id = id
             obj.c.x = round(seg(1));
             obj.c.y = round(seg(2));
             obj.o.x = seg(3);
@@ -25,6 +30,7 @@ classdef Segs<handle
             obj.h = handle;
             obj.h.Visible = 'off';
             obj.r = [obj.o.x,obj.o.y,obj.d.w,obj.d.h];
+            obj.p = 1;
         end
 
         function visible(obj,val)

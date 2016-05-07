@@ -1,6 +1,6 @@
 close all;
 clc;
-clear;
+clear all;
 addPaths();
 initVariables;
 map_fig = generateMap(seed,map_height,map_width,food_n,cache_n,obs_n);
@@ -18,12 +18,12 @@ squirrel1.spawn();
 % squirrel1.movePath(100);
 n = size(seg,1)
 curr = 1;
-while true
-	dest = randi([1,n]);
-	if dest == curr
-		continue;
-	end
-	squirrel1.path_ = getPath2Seg(dg,seg,curr,dest)
-	squirrel1.movePath(1000);
-	curr = dest;
-end
+% while true
+% 	dest = randi([1,n]);
+% 	if dest == curr
+% 		continue;
+% 	end
+% 	squirrel1.path_ = getPath2Seg(dg,seg,curr,dest)
+% 	squirrel1.movePath(1000);
+% 	curr = dest;
+% end

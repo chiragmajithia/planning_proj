@@ -1,4 +1,5 @@
-function [ dg ] = configSegGraph(seg)
+function [ dg ] = configSegGraph()
+global seg;
 dg = sparse(size(seg,1),0);
 	for i = 1:size(seg,1)
 		source = seg(i);
@@ -8,7 +9,7 @@ dg = sparse(size(seg,1),0);
             %input('check');
 		end
     end
-     h = view(biograph(dg))
+     %h = view(biograph(dg))
      %input('check');
 end
 

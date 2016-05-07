@@ -1,5 +1,6 @@
-function [ path ] = getPath2Seg( dg,seg,S,T )
-[dist, nodes, pred] = graphshortestpath(dg, S, T)
+function [ path ] = getPath2Seg(S,T )
+global seg_graph seg
+[dist, nodes, pred] = graphshortestpath(seg_graph, S, T);
 
 path = [];
 for i = 1:size(nodes,2)-1
