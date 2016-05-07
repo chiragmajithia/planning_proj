@@ -1,0 +1,15 @@
+function [ dg ] = configGraphs( seg)
+	dg = sparse(size(seg,1));
+    dg
+	for i = 1:size(seg,1)
+		source = seg(i);
+		for j = 1:size(source.n,1)
+			dg(i,source.n(j)) = 1;
+            sprintf('%d,%d',i,source.n(j));
+            input('che');
+		end
+    end
+     h = view(biograph(dg))
+     input('check');
+end
+

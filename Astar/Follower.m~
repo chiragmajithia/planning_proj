@@ -1,0 +1,44 @@
+untitled2;
+hold on;
+drawnow;
+
+Pos(1,:) = [10 10];
+Goal = [270 270];
+
+Updated_obst_loc = Obst_loc;
+for i=1:1000
+    i
+   if(collisionChk(Pos(i,:),Goal,Obst_loc))
+       [towards,idx] = nearestObstacleCorner(Pos(i,:),Updated_obst_loc,Obst_loc);
+   else
+       towards = Goal;
+       idx = 0;
+   end
+   
+   if(norm(Pos(i,:)-Goal) == 0)
+       break;
+   end
+   if(norm(Pos(i,:)-towards) == 0)
+       circulateAroundObstacle(Pos(i,:),Updated_obst_loc(idx,:));
+       Updated_obst_loc(i,:) = [];
+   end
+   
+   
+    dx = Goal(1) - Pos(i,1);
+    dy = Goal(2) - Pos(i,2);
+    adx = abs(dx);  
+    ady = abs(dy);
+    if(adx>ady)
+        newP = Pos(i) + (dx/adx)*[1 0];
+    elseif (adx<ady)
+        newP = Pos(i) + (dy/ady)*[0 1];
+    else
+        newP = Pos(i) + [(dx/adx) (dy/ady)];
+    end
+    Pos(i+1,:) = newP;
+    plot([Pos(i,1) Pos(i+1,1)])
+   
+   
+end
+
+hold off;
