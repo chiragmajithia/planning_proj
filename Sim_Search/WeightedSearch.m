@@ -9,5 +9,5 @@ while(f_found <= f)
 indx = roulette(weights);
 %input(strcat('seg selected',num2str(indx(1))));
 f_cnt = searchInSeg(indx(1),squirrel1,n,thres);
-f_found = f_cnt + squirrel1.f_cnt;
+f_found = squirrel1.f_cnt;
 end

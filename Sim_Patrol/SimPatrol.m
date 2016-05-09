@@ -19,6 +19,6 @@ weights = f_w *c_f + d_w * dist + t_w * e_time;
 i = roulette(weights);
 pos = cache(indx(i(1))).loc;
 cache(indx(i(1))).h.FaceColor = 'r';
-squirrel1.temp_input = {'PATROL',int2str(indx(i))};
+squirrel1.temp_input = {'PATROL',int2str(indx(i(1)))};
 squirrel1.move2Pos(cache(indx(i(1))).loc,1000);
 end

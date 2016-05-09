@@ -183,7 +183,7 @@ classdef Agent<handle
                 end
             end        
             f = figure(4);
-            figure(map_handle);
+            figure(map_handle)
             seg(seg_id).patchProb([x,y],f)
             pause(0.0001);
         end
@@ -219,7 +219,7 @@ classdef Agent<handle
             end
             obj.task_id = obj.FREE; %%Change it to free
             obj.temp_input = {};
-            
+            %Wobj.f_cnt = obj.f_cnt + size(f_id,1);
             %seg_.removeFood(f_id)
         end
         
@@ -234,7 +234,7 @@ classdef Agent<handle
         end
         
         function performTask(obj,inputs)
-            
+            global cache
             sprintf('obj.task_id');
             switch obj.task_id
                 case obj.PICK
@@ -242,17 +242,34 @@ classdef Agent<handle
                     
                 case obj.SEARCH
                     obj.searchTask();
-                    if(obj.f_cnt >= 10)
+                    if(obj.f_cnt >= 10+1)
                         sprintf('Search Complete for %d food!',obj.f_cnt);
-                        obj.task_id = obj.PATROL;
+                        obj.task_id = obj.FREE;
+                        obj.path_ = [];
                     end
 
                 case obj.PATROL
-                    if(isequal(obj.path_(end,:),[obj.pos.x-5,obj.pos.y-5]))
+                    
+                    if(isequal(obj.path_(end,:),[obj.pos.x,obj.pos.y]) )
                         [~,indx] = find(strcmp(inputs,'PATROL'));
                         id = str2num(inputs{indx+1})
                         cache(id).visited();
-                        sprint('patrol finish')
+                        cache(id).h.FaceColor = 'g';
+                        sprintf('patrol finish')
+                        
+                    else
+                        sprintf('running')
+                    end
+                case obj.DECEIVE
+                    if(isequal(obj.path_(end,:),[obj.pos.x,obj.pos.y]) )
+                        [~,indx] = find(strcmp(inputs,'DECEIVE'));
+                        id = str2num(inputs{indx+1})
+                        if id ~=-1
+                        cache(id).visited();
+                        cache(id).h.FaceColor = 'g';
+                        end
+                        sprintf('patrol finish')
+
                     else
                         sprintf('running')
                     end

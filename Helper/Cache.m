@@ -34,6 +34,7 @@ classdef Cache<handle
     function visited(obj)
     	obj.elapse_time = etime(clock(),clock());
     	obj.last_visited = clock();
+        sprintf('visited %d',obj.id)
         obj.h.FaceColor = 'g'; 
     end
 

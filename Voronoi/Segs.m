@@ -30,8 +30,8 @@ classdef Segs<handle
             p_ff = Gaussian_filter(11,4);
             p_ff = max(max(p_ff)) - p_ff;
             obj.visual_uncertainity = (p_ff /max(max(p_ff)));
-            obj.positive_bias = makeFilter(p_g,obj.fs_loc,size(obj.p_map));
-            obj.p_map = obj.positive_bias + obj.p_map;
+            %obj.positive_bias = makeFilter(p_g,obj.fs_loc,size(obj.p_map));
+            %obj.p_map = obj.positive_bias + obj.p_map;
             obj,p = mean(mean(obj.p_map))
             if(~isempty(fig))
                 figure(fig);
