@@ -3,8 +3,8 @@ clc;
 clear all;
 addPaths();
 initVariables;
-map_fig = generateMap(seed,map_height,map_width,food_n,cache_n,obs_n);
-figure(map_fig)
+map_handle = generateMap(seed,map_height,map_width,food_n,cache_n,obs_n);
+figure(map_handle)
 hold on;
 initSegs;
 %plotX(x_ax,y_ax);

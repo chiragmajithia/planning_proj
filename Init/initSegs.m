@@ -1,13 +1,12 @@
 name = 'variables/seg_';
 name = strcat(name,int2str(seed),'.mat')
 if(exist(name)==2 && fast_run)
-    load(name);
     sprintf('values loaded')
     [x_ax,y_ax] = generateLines();
     [merged_segs,seg_handles]=generateSegs(x_ax,y_ax);
-    seg(size(merged_segs,1),1) = Segs;
+    load(name);
     for i = 1 : size(seg)
-        seg(i).init(merged_segs(i,:),seg_handles(i,:),i);
+        seg(i).initHandles(seg_handles(i,:));
     end
 else
     [x_ax,y_ax] = generateLines();
@@ -53,9 +52,19 @@ else
         seg(i).visible(false);
         i = i + 1;
     end
+    assignFood();
+    save(name,'seg');
 end
 
-neighborCheck;
-save(name,'seg');
+%neighborCheck;
+
+if(visual_run)
+    assignFoodCheck();
+end
+
 
 seg_graph = configSegGraph();
+prob = figure;
+for i = 1 : size(seg)
+    seg(i).initFilters(prob)
+end

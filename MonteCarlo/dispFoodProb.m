@@ -26,3 +26,7 @@ for i = 1:size(food_loc,1)
 end
 [food_prob,food_loc]
 end
+
+    % 12    43     1
+    % 14    51     8
+    % 14    41    16

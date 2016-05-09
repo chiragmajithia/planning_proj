@@ -8,7 +8,7 @@ n = size(seg,1);
 found = false;
 for i = 1 : n
 	id = seg(i).id;
-	o = seg(i).o
+	o = seg(i).o;
 	d = seg(i).d;
 	if((x >= o.x && x < o.x+d.w) && (y >= o.y && y < o.y+d.h)) 
 		found = true;
@@ -19,11 +19,12 @@ if ~found
 	id = 0;
 else
 	if visual_run    
-		p = plot(x,y,'Marker','d');
-		seg(id).visible(true);
-		pause(0.5)
-		delete(p);
-		seg(id).visible(false);
+		% p = plot(x,y,'Marker','d');
+		% seg(id).visible(true);
+		% %input('user input')
+		% pause(0.5)
+		% delete(p);
+		% seg(id).visible(false);
 	end
 end
 end

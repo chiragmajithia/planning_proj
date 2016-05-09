@@ -1,0 +1,17 @@
+function [ indx ] = nearestCache( pos_w )
+global cache 
+cnt = 0;
+for i = 1 : size(cache,1)
+    if(cache(i).space_available > 0)
+        cache_loc(cnt,:) = cache(i).loc
+    else
+        cache_loc(cnt,:) = c_loc
+        sprintf('cache loc %d full',i)
+	end
+end
+pos_w = repmat(pos_w,size(cache_loc,1),1);
+dist = pos_w - cache_loc;
+dist = hypot(dist(:,1),dist(:,2));
+[~,indx] = min(dist)
+end
+

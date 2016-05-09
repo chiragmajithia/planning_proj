@@ -1,7 +1,7 @@
 function [ indx ] = roulette( weights )
 visual_run = 1;
 cdf = [0];
-n = max(size(weights))
+n = max(size(weights));
 for i = 1 : n
     cdf = [cdf,cdf(end)+weights(i)];
 end
@@ -20,7 +20,7 @@ if(visual_run)
     explode(indx(1)) = 1;
     pie(weights,explode,str);
     title('Roullete')
-    pause(0.5);
+    pause(1);
     close(h);
 end
 end

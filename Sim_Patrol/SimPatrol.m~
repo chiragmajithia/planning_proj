@@ -1,0 +1,24 @@
+indx = findPatrolCaches();
+c_f =  cacheFood();
+c_f = c_f(indx);
+c_f = c_f / max(c_f);
+
+f_w = 1;
+d_w = 5; 
+t_w = 10;
+
+squirrel.task_id = squirre
+
+while(squirrel1.task_id == squirrel1.PATROL)
+dist =  distCaches();
+dist = dist(indx);
+dist = dist/max(dist)
+e_time = getElapseTime();
+e_time = etime(indx);
+weights = f_w *c_f + d_w * dist + t_w * e_time;
+i = routelle(weights);
+pos = cache(indx(i)).loc;
+cache(indx(i)).h.FaceColor = 'r';
+squirrel1.temp_input = {'PATROL',int2str(indx(i))};
+squirrel1.move2Pos(cache(indx(i)),1000);
+end
