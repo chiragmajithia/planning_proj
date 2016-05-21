@@ -2,6 +2,7 @@ function [map_handle] = generateMap( seed_, map_height_, map_width_, food_n_, ca
 	%Generate Map
 	global obs_handles map food obs map_handle
 	map_handle = figure;
+	map_handle.set('Position',[100,100,1000,700]);
 	rectangle('Position',[0 0 map_width_ map_height_]);
 	axis('equal');
 	load('variables/constants')
@@ -45,8 +46,13 @@ function [map_handle] = generateMap( seed_, map_height_, map_width_, food_n_, ca
 	end
 	initCache(cache_loc,cache_handle);
 	fig = figure
+	map_handle.set('Position',[100,100,500,700]);
+	fig.set('Position',[700,100,500,700]);
 	I = mat2gray(map);
 	imshow(flipud(I'));
+	pause(1);
+	delete(fig);
+	map_handle.set('Position',[100,100,1000,700]);
 end
 
 %{

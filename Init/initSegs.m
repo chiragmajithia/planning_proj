@@ -65,6 +65,9 @@ end
 
 seg_graph = configSegGraph();
 prob = figure;
+prob.set('Position',[100,100,1000,700])
 for i = 1 : size(seg)
     seg(i).initFilters(prob)
 end
+pause(4);
+delete(prob);

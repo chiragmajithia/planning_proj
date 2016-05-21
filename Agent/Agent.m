@@ -9,6 +9,7 @@ classdef Agent<handle
         task_id;
         temp_input;
         f_cnt;
+        moves = 0;
     end
     
     properties(Constant)
@@ -123,7 +124,7 @@ classdef Agent<handle
                     p2 = getPath2Seg(seg1_indx,seg2_indx);
                     [v3,p3] = pathLoS(p2(end,:),pos2);
                     path = [p1;p2;p3];
-                    path = obj.optimizedPath(path,0.1);
+                    path = obj.optimizedPath(path,0.01);
                 end
             end
             
@@ -242,6 +243,7 @@ classdef Agent<handle
                     
                 case obj.SEARCH
                     obj.searchTask();
+                    obj.moves = obj.moves+1;
                     if(obj.f_cnt >= 10+1)
                         sprintf('Search Complete for %d food!',obj.f_cnt);
                         obj.task_id = obj.FREE;

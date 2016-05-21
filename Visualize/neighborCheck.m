@@ -6,12 +6,14 @@ while i <= size(seg,1)
     seg(i).h.FaceColor = 'r';
     if(visual_run)
     for j = 1:size(neighbors)
+        if(neighbors(j)>i)
         squirrel = Agent;
         seg(neighbors(j)).visible(true);
         squirrel.spawn();
         squirrel.path_ = cell2mat(seg(i).p2n(neighbors(j)))
-        squirrel.movePath(100000);
+        squirrel.moveAlongPath(100000);
         delete(squirrel.handle)
+    end
     end
     pause(0.1)
     j

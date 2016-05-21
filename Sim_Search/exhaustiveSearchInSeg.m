@@ -1,12 +1,10 @@
-function [ found_food,re_seg ] = searchInSeg( seg_indx,squirrel1,n,thres )
+function [ found_food, last_pos,d ] = exhaustiveSearchInSeg( seg_indx,squirrel1,last_pos,d )
 global visual_run seg cache
 found_food = 0;
-re_seg = seg_indx;
-seg_cent = [seg(seg_indx).c.x,seg(seg_indx).c.y];
-squirrel1.move2Pos(seg_cent,100);
 %%squirrel Moved to interested seg;
+seg_indx = squirrel1.getCurrSeg();
 
-[pos_w,~]=seg(seg_indx).generateVertices(n,thres)
+pos_w=seg(seg_indx).generateExhaustiveSearch(squirrel1,10,d);
 
 %this returns n vertices in pos_w (ignoring segment coordinates)
 %thres uses the probability map of the segment and gives vertices above thres
@@ -21,10 +19,14 @@ while(~isempty(pos_w) && curr_status == squirrel1.SEARCH)
     [~,indx] = min(dist)
     nxt_pos = pos_w(indx,:)
     pos_w(indx,:) = []
-    squirrel1.move2Pos(nxt_pos,100);
+    %d = sign(nxt_pos(2) - curr_pos(2))
+    squirrel1.move2Pos(nxt_pos,1000);
     i = i  + 1;
     curr_status = squirrel1.task_id    
 end
+sprintf('last_pos')
+last_pos = [squirrel1.pos.x,squirrel1.pos.y];
+d = -1*sign(last_pos(2) - nxt_pos(2));
 dispFoodStatus();
 visual_run = 0;
 %% check comm_variable to ensure food was found!
@@ -42,5 +44,6 @@ else
     fc_id;
 end
 visual_run = 1;
+
 end
 

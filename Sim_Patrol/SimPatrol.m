@@ -5,7 +5,7 @@ c_f = c_f / max(c_f);
 
 f_w = 1;
 d_w = 5; 
-t_w = 10;
+t_w = 100;
 
 squirrel1.task_id = squirrel1.PATROL;
 

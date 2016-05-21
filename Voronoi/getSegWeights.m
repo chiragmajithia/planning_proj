@@ -1,9 +1,9 @@
-function [weights, p, area ] = getSegWeights(pos)
+function [weights] = getSegWeights(pos)
 	global seg
+	a = 10;
+	b = -10;
 	for i = 1 : size(seg,1)
-		area(i,1) = seg(i).a;
-		p(i,1) = mean(mean(seg(i).p_map));
-		weights(i,1) = area(i,1) * p(i,1);
+		p(i,1) = mean(mean(seg(i).p_map))*seg(i).a;
 	end
 
 	for i = 1 :size(seg,1)
@@ -13,7 +13,10 @@ function [weights, p, area ] = getSegWeights(pos)
 	dist = pos - seg_c;
 	dist = hypot(dist(:,1),dist(:,2));
 	dist = dist / max(dist);
-	weights = weights - 10*dist;
+
+	p = p/max(p);
+
+	weights = a*p + b*dist
 
 end
 

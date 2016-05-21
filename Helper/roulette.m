@@ -1,4 +1,5 @@
 function [ indx ] = roulette( weights )
+global seg map_handle
 visual_run = 1;
 cdf = [0];
 n = max(size(weights));
@@ -8,10 +9,12 @@ end
 cdf = cdf / sum(weights);
 cdf = cdf(2:end);
 
-i = rand();
+i = rand()
 indx = find(cdf > i);
+
 if(visual_run)
 	h = figure;
+    h.set('Position',[1100 100 300 300]);
     str = {};
     for i = 1 : n
         str{i} = int2str(i);

@@ -6,7 +6,7 @@ classdef Segs<handle
     id%id numbers = should remain array index -kept to ensure if we need to delete any
     c %center
     o %origin
-    d %dim dx,dy
+    d %dim dw,dh
     a %area
     n %neighbors = []
     h %handle
@@ -30,8 +30,8 @@ classdef Segs<handle
             p_ff = Gaussian_filter(11,4);
             p_ff = max(max(p_ff)) - p_ff;
             obj.visual_uncertainity = (p_ff /max(max(p_ff)));
-            %obj.positive_bias = makeFilter(p_g,obj.fs_loc,size(obj.p_map));
-            %obj.p_map = obj.positive_bias + obj.p_map;
+            obj.positive_bias = makeFilter(p_g,obj.fs_loc,size(obj.p_map));
+            obj.p_map = obj.positive_bias + obj.p_map;
             obj,p = mean(mean(obj.p_map))
             if(~isempty(fig))
                 figure(fig);
@@ -116,6 +116,33 @@ classdef Segs<handle
             end
         end
 
+        function p = generateExhaustiveSearch(obj,agent,v_r,d)
+
+            step_x = v_r;
+            step_y = v_r*d;
+            if(step_x < 1)
+                step_x = 1;
+            end
+            flag = 0;
+            p = [agent.pos.x,agent.pos.y];
+            i = agent.pos.x;
+            j = agent.pos.y;
+            while (i <= obj.o.x + obj.d.w &&  i + step_x >= 1)
+                while (j < obj.o.y+ obj.d.h - step_y && j + step_y >=0)
+                    flag = 1;
+                    j = j + step_y;
+                    p = [p;[i,j]];
+                end 
+                d = d * -1;
+                step_y = v_r * d;
+                i = i + step_x;
+                %step_x
+                %p
+                %input('check')
+            end 
+            
+        end
+
         function removeFood(obj,f_id)
              indx = [];
              f_temp = obj.fw_loc;
@@ -138,6 +165,7 @@ classdef Segs<handle
 
             if(flag)
                 figure(fig);
+                fig.set('Position',[1106 378 560 420]);
                 title(strcat('Seg',num2str(obj.id)))
                 %subplot(6,6,obj.id)
                 surfc(obj.p_map);
